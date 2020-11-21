@@ -1,0 +1,52 @@
+---
+title: "LM with prediction"
+author: "Maryana Maayah"
+date: "11/21/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tigerstats)
+library(tidyverse)
+```
+
+Read about the data from the website where it is staged.  Then form three regression models; Model1 is SIMS~ARM, Model2 is SIMS~GRIP, and Model3 is SIMS~ARM+GRIP. For each model find a 95% prediction interval of SIMS given a value of 94  for GRIP and 88 for ARM. Compare Model1 with Model3 using anova. Write it up in a markdown document, push the project up to your github account and submit it back to canvas as link. 
+
+```{r}
+dataF <- read.csv(file="http://onlinestatbook.com/case_studies_rvls/physical_strength/data.txt",sep="",header=TRUE) 
+```
+
+## Model 1
+  
+```{r}
+Model1=lm(SIMS~ARM,data=dataF)
+summary(Model1)
+NewDF=data.frame(ARM=88,GRIP=94)
+predict(Model1,NewDF,interval="prediction")
+```
+  Adjusted R squared = 0.467
+  Fit= 0.71, CI= (-1.73,3.14) 
+  
+## Model 2
+  
+```{r}
+Model2=lm(SIMS~GRIP,data=dataF)
+summary(Model2)
+NewDF=data.frame(ARM=88,GRIP=94)
+predict(Model2,NewDF,interval="prediction")
+```
+  Adjusted R squared = 0.41
+  Fit= -0.54, CI= (-3.11,2.04)
+  
+## Model 3
+  
+```{r}
+Model3=lm(SIMS~ARM+GRIP,data=dataF)
+summary(Model3)
+NewDF=data.frame(ARM=88,GRIP=94)
+predict(Model3,NewDF,interval="prediction")
+```
+  Adjusted R squared = 0.54
+  Fit= 0.15, CI= (-2.13,2.43)
+  
