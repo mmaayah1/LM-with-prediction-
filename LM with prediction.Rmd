@@ -25,7 +25,7 @@ summary(Model1)
 NewDF=data.frame(ARM=88,GRIP=94)
 predict(Model1,NewDF,interval="prediction")
 ```
-  Adjusted R squared = 0.467
+  Adjusted R squared = 0.47
   Fit= 0.71, CI= (-1.73,3.14) 
   
 ## Model 2
@@ -49,4 +49,12 @@ predict(Model3,NewDF,interval="prediction")
 ```
   Adjusted R squared = 0.54
   Fit= 0.15, CI= (-2.13,2.43)
+  
+## Model1 compared to Model3 
+
+  
+```{r}
+anova(Model1,Model3)
+```
+  The P-value for comparison is 0.000004994 so we reject the null hypothesis, and conclude Model3 is better than model1. The adjusted R squared for Model3= 0.54, and the adjusted R squared for Model1 is 0.47, while the Model3 have a larger adjusted R squared makes it a better Model.
   
